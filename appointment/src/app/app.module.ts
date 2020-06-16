@@ -8,11 +8,13 @@ import { ListAppointmentComponent } from './app.component';
 import { ApiService } from './service/api.service';
 import { ScheduleAppointmentComponent } from './ScheduleAppointment/scheduleAppointment';
 import {ReactiveFormsModule} from "@angular/forms";
+import { RootComponent } from './root/root.component';
 
 @NgModule({
   declarations: [
     ListAppointmentComponent,
-    ScheduleAppointmentComponent
+    ScheduleAppointmentComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     
   ],
   providers: [ApiService],
-  bootstrap: [ListAppointmentComponent]
+  bootstrap: [RootComponent]
 })
 export class AppModule { }
 

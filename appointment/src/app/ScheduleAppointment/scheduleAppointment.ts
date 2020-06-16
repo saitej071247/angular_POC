@@ -26,9 +26,9 @@ public buttonText='Add';
       this.apiService.getAppointments().subscribe(data => {
         data.map((item)=>{
           if (item.id==this.userId){
-            console.log(item)
+          var testDate=new Date(item.appointmentSlot);
             this.addForm.patchValue({
-              appointmentSlot :item.appointmentSlot,
+              appointmentSlot: testDate.toISOString().slice(0,16),
               memberId :item.memberId,
               facilityId:item.facilityId
             });
@@ -41,9 +41,14 @@ public buttonText='Add';
   onSubmit() {
     if(this.userId){
       this.apiService.updateAppointment(this.addForm.value,this.userId).subscribe(data=>{
-     //  this.router.navigate(['users']);
+    if (data.statusCode!=200){
+      alert(data.Message);
+    }else{
+      alert("Rescheduled Successfully");
+    }
       })
     }else{
+      console.log(this.addForm.value.appointmentSlot);
       this.apiService.addAppointment(this.addForm.value).subscribe(data=>{
        // this.router.navigate(['users']);
       })

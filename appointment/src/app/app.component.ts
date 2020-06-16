@@ -4,15 +4,13 @@ import { Appointments } from './model/Appointment.model'
 import { ApiService } from './service/api.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'list-component',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class ListAppointmentComponent implements OnInit {
 
   appointments : Appointments[];
-   public add = false;
-
   constructor (
     private apiservice : ApiService,private router: Router,) { }
 
@@ -21,12 +19,10 @@ export class ListAppointmentComponent implements OnInit {
     this.apiservice.getAppointments().subscribe(data=>{
       console.log(data);
      this.appointments=data;
-     this.add=true;
     })
   }
 
   addUser() : void {
-    this.add=false;
     this.router.navigate(['add']);
   }
 
@@ -37,10 +33,14 @@ export class ListAppointmentComponent implements OnInit {
   cancelAppointemnt(id,memberId) {
     console.log(id)
     this.apiservice.deleteAppointment(id,memberId).subscribe(data=>{
+      if (data.statusCode!=200){
+        alert(data.Message);
+      }else{
+        alert("Rescheduled Successfully");
+      }
       this.apiservice.getAppointments().subscribe(data=>{
         console.log(data);
        this.appointments=data;
-       this.add=true;
       })
     })
  }

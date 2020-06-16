@@ -1,6 +1,6 @@
-<div class="col-md-6 user-container" *ngIf="add" >
+<div class="col-md-6 user-container" >
   <h2 style="margin: auto"> Appointments</h2>
-  <button class="btn btn-danger" style="width:100px" (click)="addUser()"> Add User</button>
+  <button class="btn btn-success" style="width:100px" (click)="addUser()"> Schedule</button>
   <br>
   <table class="table table-striped">
     <thead>
@@ -21,11 +21,11 @@
       <td>{{user.appointmentSlot}}</td>
       <td>{{user.memberId}}</td>
       <td>{{user.facilityId}}</td>
-       <td> <button class="btn btn-success" (click)="editAppointment(user.id)"  style="margin-left: 20px;"> Reschedule</button></td>
-        <td><button class="btn btn-success" (click)="cancelAppointemnt(user.id,user.memberId)" > Cancel</button></td> 
+       <td> <button class="btn btn-primary" (click)="editAppointment(user.id)"  style="margin-left: 20px;"> Reschedule</button></td>
+        <td><button class="btn btn-danger" (click)="cancelAppointemnt(user.id,user.memberId)" > Cancel</button></td> 
     </tr>
     </tbody>
   </table>
 </div>
 
-<router-outlet></router-outlet>
+
