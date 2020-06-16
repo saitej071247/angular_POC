@@ -9,16 +9,20 @@ export class ApiService {
 
     constructor( private http : HttpClient){}
     baseUrl: string = 'https://appointmentserviceapp-1591774967422.azurewebsites.net/getAppointments/222205';
-    postURl = 'http://localhost:3000/scheduleAppointment/'
+    URl = 'http://localhost:3000/Appointment/';
+    cancelUrl='http://localhost:3000/cancelAppointment/';
 
-    getUsers() : Observable<any>{
+
+    getAppointments() : Observable<any>{
         return this.http.get<any>(this.baseUrl)
     }
 
     addAppointment(Appointment) :Observable<any>{
+        var changedDate=new Date(Appointment.appointmentSlot);
+        var Finaldate=changedDate.toLocaleString();
         let body = {
             "memberId": Appointment.memberId,
-            "appointmentSlot": Appointment.appointmentSlot,
+            "appointmentSlot":Finaldate,
             "facilityId": Appointment.facilityId
         };
             let headers = new HttpHeaders({
@@ -27,20 +31,36 @@ export class ApiService {
                 "X-correlationid": '2342342',
             });
        
-        return this.http.post<any>(this.postURl, body, { headers: headers })
+        return this.http.post<any>(this.URl, body, { headers: headers })
 
     }
-    // editUser(id:any) :Observable<ApiResponse>{
-    //     return this.http.get<ApiResponse>(this.baseUrl + id)
+    updateAppointment(Appointment,id) :Observable<any>{
+        var changedDate=new Date(Appointment.appointmentSlot);
+        var Finaldate=changedDate.toLocaleString();
+        let body = {
+            "id": id,
+            "appointmentSlot":Finaldate
+        };
+            let headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': "7457hhg988",
+                "X-correlationid": '2342342',
+            });
+        return this.http.put<any>(this.URl, body, { headers: headers })
   
-    // }
-    // updateUser(user:User) :Observable<ApiResponse>{
-    //     return this.http.put<ApiResponse>(this.baseUrl + user.id,user)
+    }
+    deleteAppointment(id:any,memberId) :Observable<any>{
+        let body = {
+            "id": id,
+            "memberId": memberId,
+        };
+            let headers = new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': "7457hhg988",
+                "X-correlationid": '2342342',
+            });
+        return this.http.put<any>(this.cancelUrl, body, { headers: headers })
   
-    // }
-    // deleteUser(id:any) :Observable<ApiResponse>{
-    //     return this.http.get<ApiResponse>(this.deleteUrl + id)
-  
-    // }
+    }
 
 }

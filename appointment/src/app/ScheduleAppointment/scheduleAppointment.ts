@@ -21,19 +21,28 @@ public buttonText='Add';
 
     })
     if (this.route.snapshot.paramMap.get('id')) {
-      // this.buttonText='Update'
-      // this.userId = this.route.snapshot.paramMap.get('id');
-      // this.apiService.editUser(this.userId).subscribe(data => {
-      //   this.addForm.setValue(data.data);
-      // })
+      this.buttonText='Reschedule'
+      this.userId = this.route.snapshot.paramMap.get('id');
+      this.apiService.getAppointments().subscribe(data => {
+        data.map((item)=>{
+          if (item.id==this.userId){
+            console.log(item)
+            this.addForm.patchValue({
+              appointmentSlot :item.appointmentSlot,
+              memberId :item.memberId,
+              facilityId:item.facilityId
+            });
+          }
+               })
+      })
     }
   }
 
   onSubmit() {
     if(this.userId){
-      // this.apiService.updateUser(this.addForm.value).subscribe(data=>{
-      //  this.router.navigate(['users']);
-      // })
+      this.apiService.updateAppointment(this.addForm.value,this.userId).subscribe(data=>{
+     //  this.router.navigate(['users']);
+      })
     }else{
       this.apiService.addAppointment(this.addForm.value).subscribe(data=>{
        // this.router.navigate(['users']);

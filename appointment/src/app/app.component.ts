@@ -18,7 +18,7 @@ export class ListAppointmentComponent implements OnInit {
 
   ngOnInit() {
     //get Users List
-    this.apiservice.getUsers().subscribe(data=>{
+    this.apiservice.getAppointments().subscribe(data=>{
       console.log(data);
      this.appointments=data;
      this.add=true;
@@ -30,14 +30,18 @@ export class ListAppointmentComponent implements OnInit {
     this.router.navigate(['add']);
   }
 
-//   editUser(id) {
-//    this.router.navigate(['/edit', id]);
-//   }
+  editAppointment(id) {
+   this.router.navigate(['/edit', id]);
+  }
 
-//   deleteUser(id) {
-//     console.log(id)
-//     this.apiservice.deleteUser(id).subscribe(data=>{
-//       this.users = this.users.filter(u => u.id !== id);
-//     })
-//  }
+  cancelAppointemnt(id,memberId) {
+    console.log(id)
+    this.apiservice.deleteAppointment(id,memberId).subscribe(data=>{
+      this.apiservice.getAppointments().subscribe(data=>{
+        console.log(data);
+       this.appointments=data;
+       this.add=true;
+      })
+    })
+ }
 }

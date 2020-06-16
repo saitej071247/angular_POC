@@ -21,8 +21,8 @@
       <td>{{user.appointmentSlot}}</td>
       <td>{{user.memberId}}</td>
       <td>{{user.facilityId}}</td>
-       <td> <button class="btn btn-success"  style="margin-left: 20px;"> Reschedule</button></td>
-       <td><button class="btn btn-success" > Cancel</button></td>
+       <td> <button class="btn btn-success" (click)="editAppointment(user.id)"  style="margin-left: 20px;"> Reschedule</button></td>
+        <td><button class="btn btn-success" (click)="cancelAppointemnt(user.id,user.memberId)" > Cancel</button></td> 
     </tr>
     </tbody>
   </table>
