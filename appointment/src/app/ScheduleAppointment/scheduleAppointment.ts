@@ -15,12 +15,9 @@ public buttonText='Add';
   addForm : FormGroup
   ngOnInit() {
     this.addForm = this.formBuilder.group({
-      id:[],
-      username: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      age: ['', Validators.required],
-      salary: ['', Validators.required]
+      appointmentSlot: ['', Validators.required],
+      memberId: ['', Validators.required],
+      facilityId: ['', Validators.required]
 
     })
     if (this.route.snapshot.paramMap.get('id')) {
@@ -33,15 +30,15 @@ public buttonText='Add';
   }
 
   onSubmit() {
-    // if(this.userId){
-    //   this.apiService.updateUser(this.addForm.value).subscribe(data=>{
-    //    this.router.navigate(['users']);
-    //   })
-    // }else{
-    //   this.apiService.addUser(this.addForm.value).subscribe(data=>{
-    //     this.router.navigate(['users']);
-    //   })
-    // }
+    if(this.userId){
+      // this.apiService.updateUser(this.addForm.value).subscribe(data=>{
+      //  this.router.navigate(['users']);
+      // })
+    }else{
+      this.apiService.addAppointment(this.addForm.value).subscribe(data=>{
+       // this.router.navigate(['users']);
+      })
+    }
    
   }
 
