@@ -8,7 +8,7 @@
   
       <div class="form-group">
         <label for="firstName">Member ID:</label>
-        <input formControlName="memberId" placeholder="Memeber ID" name="memberId" class="form-control" id="memberId">
+        <input formControlName="memberId" [attr.disabled]="EditForm ? '' : null" placeholder="Memeber ID" name="memberId" class="form-control" id="memberId">
       </div>
       <div class="form-group">
         <label for="firstName">Facility ID:</label>

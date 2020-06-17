@@ -4,9 +4,9 @@ import { ListAppointmentComponent} from './app.component';
 import { ScheduleAppointmentComponent} from './ScheduleAppointment/scheduleAppointment'
 
 const routes: Routes = [
-{ path: 'users', component: ListAppointmentComponent },
+{ path: 'users/:memberId', component: ListAppointmentComponent },
   { path:'add',component:ScheduleAppointmentComponent},
- { path:'edit/:id',component:ScheduleAppointmentComponent}
+ { path:'edit/:id/:memberId',component:ScheduleAppointmentComponent}
 ];
 
 @NgModule({

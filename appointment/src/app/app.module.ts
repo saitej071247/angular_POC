@@ -9,6 +9,7 @@ import { ApiService } from './service/api.service';
 import { ScheduleAppointmentComponent } from './ScheduleAppointment/scheduleAppointment';
 import {ReactiveFormsModule} from "@angular/forms";
 import { RootComponent } from './root/root.component';
+import {TokenInfo} from './model/api.response'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { RootComponent } from './root/root.component';
     ReactiveFormsModule
     
   ],
-  providers: [ApiService],
+  providers: [ApiService,TokenInfo],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
