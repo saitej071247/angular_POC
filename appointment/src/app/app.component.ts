@@ -11,6 +11,7 @@ export class ListAppointmentComponent implements OnInit {
 
   appointments: Appointments[];
   public memberId: any;
+  public showList = false;
   constructor(
     private apiservice: ApiService, private router: Router, private route: ActivatedRoute) { }
 
@@ -20,6 +21,7 @@ export class ListAppointmentComponent implements OnInit {
     this.apiservice.getAppointments(this.memberId).subscribe(data => {
       console.log(data);
       this.appointments = data;
+      this.showList = this.appointments.length ? true : false;
     })
   }
 
@@ -46,7 +48,6 @@ export class ListAppointmentComponent implements OnInit {
         }
       })
     } else {
-      alert("Appointment is Safe");
     }
 
   }

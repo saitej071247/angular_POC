@@ -23,7 +23,9 @@ export class ApiService {
 
     addAppointment(Appointment): Observable<any> {
         var changedDate = new Date(Appointment.appointmentSlot);
+        console.log(changedDate);
         var Finaldate = changedDate.toLocaleString();
+        console.log(Finaldate);
         let body = {
             "memberId": Appointment.memberId,
             "appointmentSlot": Finaldate,

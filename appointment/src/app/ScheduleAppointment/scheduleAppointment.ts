@@ -30,7 +30,10 @@ export class ScheduleAppointmentComponent implements OnInit {
       this.apiService.getAppointments(this.memberId).subscribe(data => {
         data.map((item) => {
           if (item.id == this.userId) {
-            var testDate = new Date(item.appointmentSlot);
+            var splicedDate = item.appointmentSlot.slice(0, -3);
+            var newSplicedDate = (splicedDate.split(",")[0]).split("/");
+            var finalDate = newSplicedDate[1] + '/' + newSplicedDate[0] + '/' + newSplicedDate[2] + ',' + splicedDate.split(",")[1];
+            var testDate = new Date(finalDate);
             this.addForm.patchValue({
               appointmentSlot: testDate.toISOString().slice(0, 16),
               memberId: item.memberId,
@@ -55,8 +58,12 @@ export class ScheduleAppointmentComponent implements OnInit {
       })
     } else {
       this.apiService.addAppointment(this.addForm.value).subscribe(data => {
-        alert("Scheduled Successfully");
-        this.router.navigate(['users', this.addForm.value.memberId]);
+        if (data.statusCode != 200) {
+          alert(data.Message);
+        } else {
+          alert("Scheduled Successfully");
+          this.router.navigate(['users', this.addForm.value.memberId]);
+        }
       })
     }
 
