@@ -32,10 +32,9 @@ export class ScheduleAppointmentComponent implements OnInit {
           if (item.id == this.userId) {
             var splicedDate = item.appointmentSlot.slice(0, -3);
             var newSplicedDate = (splicedDate.split(",")[0]).split("/");
-            var finalDate = newSplicedDate[1] + '/' + newSplicedDate[0] + '/' + newSplicedDate[2] + ',' + splicedDate.split(",")[1];
-            var testDate = new Date(finalDate);
+            var finalDate = newSplicedDate[2] + '-' + newSplicedDate[1] + '-' + newSplicedDate[0] + 'T' + splicedDate.split(",")[1].trim()
             this.addForm.patchValue({
-              appointmentSlot: testDate.toISOString().slice(0, 16),
+              appointmentSlot: finalDate,
               memberId: item.memberId,
               facilityId: item.facilityId
             });
