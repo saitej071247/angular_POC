@@ -22,13 +22,9 @@ export class ApiService {
     }
 
     addAppointment(Appointment): Observable<any> {
-        var changedDate = new Date(Appointment.appointmentSlot);
-        console.log(changedDate);
-        var Finaldate = changedDate.toLocaleString();
-        console.log(Finaldate);
         let body = {
             "memberId": Appointment.memberId,
-            "appointmentSlot": Finaldate,
+            "appointmentSlot": Appointment.appointmentSlot,
             "facilityId": Appointment.facilityId
         };
         let headers = new HttpHeaders({
@@ -41,11 +37,9 @@ export class ApiService {
 
     }
     updateAppointment(Appointment, id): Observable<any> {
-        var changedDate = new Date(Appointment.appointmentSlot);
-        var Finaldate = changedDate.toLocaleString();
         let body = {
             "id": id,
-            "appointmentSlot": Finaldate
+            "appointmentSlot": Appointment.appointmentSlot
         };
         let headers = new HttpHeaders({
             'Content-Type': 'application/json',

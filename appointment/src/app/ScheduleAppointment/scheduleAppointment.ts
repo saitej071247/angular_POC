@@ -30,11 +30,8 @@ export class ScheduleAppointmentComponent implements OnInit {
       this.apiService.getAppointments(this.memberId).subscribe(data => {
         data.map((item) => {
           if (item.id == this.userId) {
-            var splicedDate = item.appointmentSlot.slice(0, -3);
-            var newSplicedDate = (splicedDate.split(",")[0]).split("/");
-            var finalDate = newSplicedDate[2] + '-' + newSplicedDate[1] + '-' + newSplicedDate[0] + 'T' + splicedDate.split(",")[1].trim()
             this.addForm.patchValue({
-              appointmentSlot: finalDate,
+              appointmentSlot: item.appointmentSlot,
               memberId: item.memberId,
               facilityId: item.facilityId
             });

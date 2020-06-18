@@ -19,8 +19,14 @@ export class ListAppointmentComponent implements OnInit {
     //get Users List
     this.memberId = this.route.snapshot.paramMap.get('memberId');
     this.apiservice.getAppointments(this.memberId).subscribe(data => {
+      if (data)
+        data.map((item) => {
+          var tempSplit = (item.appointmentSlot.split("T"))[0].split("-");
+          var dateFormat = tempSplit[2] + '/' + tempSplit[1] + '/' + tempSplit[0] + ', ' + item.appointmentSlot.split("T")[1]
+          item.appointmentSlot = dateFormat;
+        });
       console.log(data);
-      this.appointments = data;
+      this.appointments = data
       this.showList = this.appointments.length ? true : false;
     })
   }
