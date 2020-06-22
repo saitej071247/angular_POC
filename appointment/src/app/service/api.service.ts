@@ -9,8 +9,10 @@ import { TokenInfo } from '../model/api.response'
 export class ApiService {
 
     constructor(private http: HttpClient, private gttokendata: TokenInfo) { }
+    PostUrl="https://schedule-appt-jwt.azurewebsites.net/schedule"
     URl = 'http://localhost:3000/Appointment/';
     cancelUrl = 'http://localhost:3000/cancelAppointment/';
+
 
 
 
@@ -33,13 +35,14 @@ export class ApiService {
             "X-correlationid": '2342342',
         });
 
-        return this.http.post<any>(this.URl, body, { headers: headers })
+        return this.http.post<any>(this.PostUrl, body, { headers: headers })
 
     }
     updateAppointment(Appointment, id): Observable<any> {
         let body = {
             "id": id,
-            "appointmentSlot": Appointment.appointmentSlot
+            "appointmentSlot": Appointment.appointmentSlot,
+            "memberId":Appointment.memberId
         };
         let headers = new HttpHeaders({
             'Content-Type': 'application/json',

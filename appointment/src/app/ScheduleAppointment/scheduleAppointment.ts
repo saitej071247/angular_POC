@@ -53,9 +53,9 @@ export class ScheduleAppointmentComponent implements OnInit {
         }
       })
     } else {
-      this.apiService.addAppointment(this.addForm.value).subscribe(data => {
-        if (data.statusCode != 200) {
-          alert(data.Message);
+      this.apiService.addAppointment(this.addForm.value).subscribe(response => {
+        if (response.statusCode != 200) {
+          alert(response.Message);
         } else {
           alert("Scheduled Successfully");
           this.router.navigate(['users', this.addForm.value.memberId]);
